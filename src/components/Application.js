@@ -1,86 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
+import { getAppointmentsForDay, getInterviewersForDay, getInterview } from "helpers/selectors";
 
-const appointments = [
-  {
-    id: 1,
-    time: "12pm",
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  {
-    id: 3,
-    time: "2pm",
-  },
-  {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Archie Cohen",
-      interviewer: {
-        id: 2,
-        name: "Tori Malcolm",
-        avatar: "https://i.imgur.com/Nmx0Qxo.png",
-      }
-    }
-  },
-  {
-    id: 5,
-    time: "4pm",
-    interview: {
-      student: "Maria Boucher",
-      interviewer: {
-        id: 3,
-        name: "Mildred Nazir",
-        avatar: "https://i.imgur.com/T2WwVfS.png",
-      }
-    }
-  }
-];
-
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
+import { useApplicationData } from "hooks/useApplicationData";
 
 export default function Application(props) {
+  const { state, setDay, bookInterview, deleteInterview } = useApplicationData();
+
+  const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
+
   const schedule = appointments.map(appointment => {
+    const interview = getInterview(state, appointment.interview);
+
     return (
       <Appointment
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
-        interview={appointment.interview}
+        interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
+        deleteInterview={deleteInterview}
       />
     );
   });
-  const [day, setDay] = useState("Monday");
 
   return (
     <main className="layout">
@@ -92,7 +39,9 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={days} day={day} setDay={setDay} />
+          <ul>
+            <DayList days={state.days} day={state.day} setDay={setDay} />
+          </ul>
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"

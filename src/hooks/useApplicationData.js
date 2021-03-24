@@ -3,7 +3,7 @@ import axios from "axios";
 import { updateSpotsRemaining, createNewAppointments } from "helpers/dataUpdaters";
 import { reducer, SET_DAY, SET_APPLICATION_DATA, SET_INTERVIEW } from "reducers/application";
 
-export default function useApplicationData() {
+function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
@@ -88,3 +88,5 @@ export default function useApplicationData() {
 
   return { state, setDay, bookInterview, deleteInterview };
 };
+
+export { useApplicationData }
