@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
-export default function Form(props) {
+function Form(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
@@ -41,8 +41,9 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             value={name}
-            onChange={newName => setName(newName.target.value)}
-            onSubmit={event => event.preventDefault()}
+            onChange={event => {
+              setName(event.target.value);
+            }}
             data-testid="student-name-input"
           />
         </form>
@@ -58,3 +59,5 @@ export default function Form(props) {
     </main>
   );
 };
+
+export default Form;

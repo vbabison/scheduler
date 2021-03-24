@@ -1,8 +1,8 @@
 import React from "react";
 import "components/DayListItem.scss";
-import classNames from "classnames";
+let classNames = require("classnames");
 
-export default function DayListItem(props) {
+function DayListItem(props) {
   let dayClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
     "day-list__item--full": props.spots === 0
@@ -29,3 +29,5 @@ export default function DayListItem(props) {
     </li>
   );
 }
+
+export default DayListItem;

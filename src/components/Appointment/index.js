@@ -8,7 +8,7 @@ import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error";
-import useVisualMode from "hooks/useVisualMode";
+import { useVisualMode } from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -20,7 +20,7 @@ const CONFIRM_DELETE = "CONFIRM_DELETE";
 const ERROR_SAVING = "ERROR_SAVING";
 const ERROR_DELETING = "ERROR_DELETING";
 
-export default function Appointment(props) {
+function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -106,3 +106,5 @@ export default function Appointment(props) {
     </article>
   );
 }
+
+export default Appointment;

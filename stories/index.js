@@ -4,7 +4,6 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import "index.scss";
-import "components/Appointment/styles.scss";
 
 import Button from "components/Button";
 import DayListItem from "components/DayListItem";
@@ -153,9 +152,9 @@ storiesOf("Appointment", module)
   .add("Show", () => 
   <Show
     student="Lydia Miller-Jones"
+    interviewer={interviewer}
     onEdit={action("onEdit")}
     onDelete={action("onDelete")}
-    interviewer={interviewer}
   />)
   .add("Confirm", () => (
     <Confirm
