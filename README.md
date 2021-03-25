@@ -21,3 +21,6 @@ npm test
 ```sh
 npm run storybook
 ```
+## Screenshots
+
+Appointments Page !["Appointments Page to Add an appointment!"](https://github.com/vbabison/scheduler/blob/master/docs/appointment-form.png)
